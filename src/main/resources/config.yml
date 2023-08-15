@@ -1,0 +1,7 @@
+messages:
+  seconds-before-swapping-msg: "seconds before swapping inventory." # Colors are setted automatically.
+  started-swapping-msg: "Swapping inventory."
+  started-msg: "Started inventory swap with %s."
+  stopped-msg: "Stopped inventory swap."
+  player-name-invalid: "Player is invalid."
+  cannot-start-two: "Cannot start two instances."
