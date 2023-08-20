@@ -12,4 +12,11 @@ For stopping the current InventorySwap use "/swap-stop"
 ## Config.yml
 - "seconds-before-swapping-msg:", "started-swapping-msg:", "started-msg:", "stopped-msg:", "player-name-invalid:" and "cannot-start-two:" you can change them if you want the message to be changed.
 
+## Perms
+
+- Starting : /swap <secs_between> <player1> <player2>
+>> permission : swap.use
+- Stop : /swap-stop
+>> permission : swap.use
+
 # Thank you and enjoy!
