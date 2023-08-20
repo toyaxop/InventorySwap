@@ -1,5 +1,7 @@
 
-# InventorySwap : https://www.spigotmc.org/resources/inventoryswap.111924/
+# InventorySwap
+## https://www.spigotmc.org/resources/inventoryswap.111924/
+## https://legacy.curseforge.com/minecraft/bukkit-plugins/inventoryswap
 
 This is a basic InventorySwap plugin for minecraft for multiple players.
 
