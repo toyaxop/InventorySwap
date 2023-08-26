@@ -48,7 +48,7 @@ public class SwapCMD implements CommandExecutor {
             for (int j = 0; j < players.size(); j++)
                 pB.append(((Player)players.get(j)).getDisplayName()).append((j != players.size() - 1) ? "," : "");
             startSwapTask(timer, players);
-            Bukkit.broadcastMessage(String.format(this.pluginMain.getConfig().getString("messages.started-msg"), new Object[] { pB.toString() }));
+            Bukkit.broadcastMessage("§4"+String.format(this.pluginMain.getConfig().getString("messages.started-msg"), new Object[] { pB.toString() }));
             return true;
         }
         if (label.equalsIgnoreCase("swap-stop")) {
@@ -64,43 +64,46 @@ public class SwapCMD implements CommandExecutor {
 
             public void run() {
                 if (this.time == 15) {
-                    Bukkit.broadcastMessage(this.time + " " + SwapCMD.this.pluginMain.getConfig().getString("messages.seconds-before-swapping-msg"));
+                    Bukkit.broadcastMessage("§e"+this.time + " " + SwapCMD.this.pluginMain.getConfig().getString("messages.seconds-before-swapping-msg"));
                 } else if (this.time == 0) {
-                    Bukkit.broadcastMessage(SwapCMD.this.pluginMain.getConfig().getString("messages.started-swapping-msg"));
-                            List<ItemStack[]> contents = (List)new ArrayList<>();
-                    List<ItemStack> offHands = new ArrayList<>();
-                    List<ItemStack[]> armors = (List)new ArrayList<>();
-                    players.forEach(p -> {
-                        contents.add(p.getInventory().getContents());
-                        offHands.add(p.getInventory().getItemInOffHand());
-                        armors.add(new ItemStack[] { p.getInventory().getItem(EquipmentSlot.HEAD), p.getInventory().getItem(EquipmentSlot.CHEST), p.getInventory().getItem(EquipmentSlot.LEGS), p.getInventory().getItem(EquipmentSlot.FEET)});
-                    });
-                    for (int i = 0; i < players.size(); i++) {
-                        Player p = players.get(i);
-                        if (i == 0) {
-                            p.getInventory().setContents(contents.get(players.size() - 1));
-                            p.getInventory().setItemInOffHand(offHands.get(players.size() - 1));
-                            p.getInventory().setHelmet(((ItemStack[])armors.get(players.size() - 1))[0]);
-                            p.getInventory().setChestplate(((ItemStack[])armors.get(players.size() - 1))[1]);
-                            p.getInventory().setLeggings(((ItemStack[])armors.get(players.size() - 1))[2]);
-                            p.getInventory().setBoots(((ItemStack[])armors.get(players.size() - 1))[3]);
-                        } else {
-                            p.getInventory().setContents(contents.get(i - 1));
-                            p.getInventory().setItemInOffHand(offHands.get(i - 1));
-                            p.getInventory().setHelmet(((ItemStack[])armors.get(i - 1))[0]);
-                            p.getInventory().setChestplate(((ItemStack[])armors.get(i - 1))[1]);
-                            p.getInventory().setLeggings(((ItemStack[])armors.get(i - 1))[2]);
-                            p.getInventory().setBoots(((ItemStack[])armors.get(i - 1))[3]);
+                    if(!checkPlayers(players)){} else {
+                        Bukkit.broadcastMessage("§c§l"+SwapCMD.this.pluginMain.getConfig().getString("messages.started-swapping-msg"));
+                        List<ItemStack[]> contents = (List)new ArrayList<>();
+                        List<ItemStack> offHands = new ArrayList<>();
+                        List<ItemStack[]> armors = (List)new ArrayList<>();
+                        players.forEach(p -> {
+                            contents.add(p.getInventory().getContents());
+                            offHands.add(p.getInventory().getItemInOffHand());
+                            armors.add(new ItemStack[] { p.getInventory().getItem(EquipmentSlot.HEAD), p.getInventory().getItem(EquipmentSlot.CHEST), p.getInventory().getItem(EquipmentSlot.LEGS), p.getInventory().getItem(EquipmentSlot.FEET)});
+                        });
+                        for (int i = 0; i < players.size(); i++) {
+                            Player p = players.get(i);
+                            if (i == 0) {
+                                p.getInventory().setContents(contents.get(players.size() - 1));
+                                p.getInventory().setItemInOffHand(offHands.get(players.size() - 1));
+                                p.getInventory().setHelmet(((ItemStack[])armors.get(players.size() - 1))[0]);
+                                p.getInventory().setChestplate(((ItemStack[])armors.get(players.size() - 1))[1]);
+                                p.getInventory().setLeggings(((ItemStack[])armors.get(players.size() - 1))[2]);
+                                p.getInventory().setBoots(((ItemStack[])armors.get(players.size() - 1))[3]);
+                            } else {
+                                p.getInventory().setContents(contents.get(i - 1));
+                                p.getInventory().setItemInOffHand(offHands.get(i - 1));
+                                p.getInventory().setHelmet(((ItemStack[])armors.get(i - 1))[0]);
+                                p.getInventory().setChestplate(((ItemStack[])armors.get(i - 1))[1]);
+                                p.getInventory().setLeggings(((ItemStack[])armors.get(i - 1))[2]);
+                                p.getInventory().setBoots(((ItemStack[])armors.get(i - 1))[3]);
+                            }
                         }
                     }
                     this.time = timer;
                 } else if (this.time <= 5) {
                     if (this.time == 1) {
-                        Bukkit.broadcastMessage(this.time + " " + ((String)Objects.<String>requireNonNull(SwapCMD.this.pluginMain.getConfig().getString("messages.seconds-before-swapping-msg"))).toUpperCase());
+                        Bukkit.broadcastMessage("§c§l"+this.time + " " + ((String)Objects.<String>requireNonNull(SwapCMD.this.pluginMain.getConfig().getString("messages.seconds-before-swapping-msg"))).toUpperCase());
                     } else {
-                        Bukkit.broadcastMessage(this.time + " "+ SwapCMD.this.pluginMain.getConfig().getString("messages.seconds-before-swapping-msg"));
+                        Bukkit.broadcastMessage("§c"+this.time + " "+ SwapCMD.this.pluginMain.getConfig().getString("messages.seconds-before-swapping-msg"));
                     }
                 }
+                checkPlayers(players);
                 players.forEach(p -> p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(this.time + " " + SwapCMD.this.pluginMain.getConfig().getString("messages.seconds-before-swapping-msg"), ChatColor.BLUE)));
                 this.time--;
             }
@@ -110,5 +113,19 @@ public class SwapCMD implements CommandExecutor {
     private void stopSwapTask() {
         InventorySwap.task.cancel();
         InventorySwap.task = null;
+    }
+
+    private boolean checkPlayers(final List<Player> players) {
+        boolean allPlayersOnline = true;
+
+        for (Player player : players) {
+            if (!player.isOnline()) {
+                stopSwapTask();
+                Bukkit.broadcastMessage("§4§l" + this.pluginMain.getConfig().getString("messages.stopped-disconnect"));
+                allPlayersOnline = false;
+                break;
+            }
+        }
+        return allPlayersOnline;
     }
 }
