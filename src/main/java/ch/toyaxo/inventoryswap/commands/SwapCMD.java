@@ -41,7 +41,7 @@ public class SwapCMD implements CommandExecutor {
                 players.add(p);
             }
             if (players.size() < 2) {
-                sender.sendMessage("need at least 2 players !");
+                sender.sendMessage("Need at least 2 players !");
                 return true;
             }
             StringBuilder pB = new StringBuilder();
