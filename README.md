@@ -1,8 +1,6 @@
 
 # InventorySwap
-https://modrinth.com/plugin/inventoryswap
-
-https://legacy.curseforge.com/minecraft/bukkit-plugins/inventoryswap
+https://curseforge.com/minecraft/bukkit-plugins/inventoryswap
 
 This is a basic InventorySwap plugin for Minecraft for multiple players.
 
