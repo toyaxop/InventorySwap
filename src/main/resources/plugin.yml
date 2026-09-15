@@ -1,7 +1,7 @@
-name: InventorySwap
-version: '1.2.2'
+name: InventorySwap-1.2.3
+version: '1.2.3'
 main: ch.toyaxo.inventoryswap.InventorySwap
-api-version: "1.21"
+api-version: "26.2"
 authors: [toyaxo]
 description: "An inventory swap plugin"
 prefix: "InventorySwap"

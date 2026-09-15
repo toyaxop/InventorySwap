@@ -77,7 +77,7 @@ public class SwapCMD implements CommandExecutor {
                         List<ItemStack> offHands = new ArrayList<>();
                         List<ItemStack[]> armors = (List)new ArrayList<>();
                         players.forEach(p -> {
-                            contents.add(p.getInventory().getContents());
+                            contents.add(p.getInventory().getContents().clone());
                             offHands.add(p.getInventory().getItemInOffHand());
                             armors.add(new ItemStack[] { p.getInventory().getItem(EquipmentSlot.HEAD), p.getInventory().getItem(EquipmentSlot.CHEST), p.getInventory().getItem(EquipmentSlot.LEGS), p.getInventory().getItem(EquipmentSlot.FEET)});
                         });
